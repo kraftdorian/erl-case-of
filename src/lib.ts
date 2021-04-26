@@ -19,7 +19,7 @@ type ExecutedPredicate = [number, boolean, PredicateSpecExpr, PredicateSpecResul
 type AccumulativeExecutedPredicate = ExecutedPredicate | [];
 
 // Predicate expression which matches any case expression
-const PREDICATE_EXPR_ANY: Symbol = Symbol("_");
+const PREDICATE_EXPR_ANY: symbol = Symbol("_");
 
 /**
  * Is passed predicate a valid predicate?

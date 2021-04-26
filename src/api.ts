@@ -4,7 +4,7 @@ import {
   PredicateSpecExpr,
   PredicateSpecResultFn,
   PREDICATE_EXPR_ANY,
-  caseSpecification
+  caseSpecification,
 } from './lib';
 
 // Case API interface
@@ -16,17 +16,23 @@ interface CaseAPI {
 type CaseAPIFn = (expression: CaseSpecExpr) => CaseAPI;
 
 // Case API expression function
-type CaseAPIExprFn = (predicateSpecExpr: PredicateSpecExpr, predicateSpecResultFn: PredicateSpecResultFn) => PredicateSpec;
+type CaseAPIExprFn = (
+  predicateSpecExpr: PredicateSpecExpr,
+  predicateSpecResultFn: PredicateSpecResultFn
+) => PredicateSpec;
 
 // Case API any expression function
-type CaseAPIAnyExprFn = (predicateSpecResultFn: PredicateSpecResultFn) => PredicateSpec;
+type CaseAPIAnyExprFn = (
+  predicateSpecResultFn: PredicateSpecResultFn
+) => PredicateSpec;
 
 /**
  * Creates and executes provided case specification
  * @param expression Expression to match
  */
 const _case: CaseAPIFn = (expression: CaseSpecExpr) => ({
-  of: (...predicateSpecs: PredicateSpec[]) => caseSpecification(expression, predicateSpecs)
+  of: (...predicateSpecs: PredicateSpec[]) =>
+    caseSpecification(expression, predicateSpecs),
 });
 
 /**
@@ -34,12 +40,16 @@ const _case: CaseAPIFn = (expression: CaseSpecExpr) => ({
  * @param predicateSpecExpr Predicate specification expression
  * @param predicateSpecResultFn Predicate specification result function
  */
-const _expr: CaseAPIExprFn = (predicateSpecExpr: PredicateSpecExpr, predicateSpecResultFn: PredicateSpecResultFn) => ([predicateSpecExpr, predicateSpecResultFn]);
+const _expr: CaseAPIExprFn = (
+  predicateSpecExpr: PredicateSpecExpr,
+  predicateSpecResultFn: PredicateSpecResultFn
+) => [predicateSpecExpr, predicateSpecResultFn];
 
 /**
  * Creates case API compatible any match expression
  * @param predicateSpecResultFn Predicate specification result function
  */
-const _any: CaseAPIAnyExprFn = (predicateSpecResultFn: PredicateSpecResultFn) => _expr(PREDICATE_EXPR_ANY, predicateSpecResultFn);
+const _any: CaseAPIAnyExprFn = (predicateSpecResultFn: PredicateSpecResultFn) =>
+  _expr(PREDICATE_EXPR_ANY, predicateSpecResultFn);
 
-export {_case, _expr, _any}
+export { _case, _expr, _any };
